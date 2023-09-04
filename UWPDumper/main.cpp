@@ -92,7 +92,12 @@ std::uint32_t __stdcall DumperThread(void* DLLHandle)
 	{
 		if( fs::is_regular_file(Entry.path()) )
 		{
-			FileList.push_back(Entry);
+			const auto& extension = Entry.path().extension();
+			if (extension == ".exe" || extension == ".EXE" ||
+			    extension == ".dll" || extension == ".DLL")
+			{
+				FileList.push_back(Entry);
+			}
 		}
 	}
 
